@@ -1,0 +1,10 @@
+{
+  "description": "Streamline project management for MSMEs in custom equipment manufacturing, providing real-time insights into project status, risks, and vendor performance.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

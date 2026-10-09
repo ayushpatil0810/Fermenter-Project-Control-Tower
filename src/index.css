@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import 'tailwindcss';
+
+@theme {
+  --spacing-copilot-width: 26rem;
+  --spacing-copilot-height: 40rem;
+  --spacing-copilot-launcher: 3.75rem;
+  --font-sans: 'Barlow', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Barlow Condensed', 'Barlow', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-nav: #0c1626;
+  --color-nav-2: #14233a;
+  --color-ink: #0f1b2d;
+  --color-mute: #566377;
+  --color-line: #e1e6ee;
+  --color-paper: #f4f6f9;
+  --color-brand: #1b5bd0;
+  --color-brand-soft: #e6eefc;
+  --color-ok: #0f7d45;
+  --color-ok-soft: #e3f4ea;
+  --color-warn: #a65d00;
+  --color-warn-soft: #fdf0d9;
+  --color-bad: #c02525;
+  --color-bad-soft: #fde8e8;
+  --color-eng: #6334c0;
+  --color-eng-soft: #eee8fb;
+  --color-idle: #6b7686;
+  --color-idle-soft: #eceff3;
+}
+
+.copilot-launcher {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  z-index: 45;
+}
+.copilot-launch-button {
+  height: var(--spacing-copilot-launcher);
+  min-width: var(--spacing-copilot-launcher);
+  border-radius: 9999px;
+  box-shadow: 0 6px 24px color-mix(in srgb, var(--color-nav) 22%, transparent);
+}
+.copilot-window {
+  position: fixed;
+  right: 1.5rem;
+  bottom: 1.5rem;
+  width: var(--spacing-copilot-width);
+  height: min(var(--spacing-copilot-height), calc(100dvh - 3rem));
+  max-width: calc(100vw - 3rem);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 16px 48px color-mix(in srgb, var(--color-nav) 20%, transparent);
+  z-index: 45;
+}
+.copilot-window[hidden], .copilot-launcher[hidden] { display: none; }
+@media (max-width: 767px) {
+  .copilot-launcher {
+    right: 1rem;
+    bottom: calc(5rem + env(safe-area-inset-bottom));
+  }
+  .copilot-window {
+    right: .5rem;
+    left: .5rem;
+    top: max(.5rem, env(safe-area-inset-top));
+    bottom: calc(4rem + env(safe-area-inset-bottom));
+    width: auto;
+    height: auto;
+    max-width: none;
+  }
+  .copilot-composer { padding-bottom: max(.75rem, env(safe-area-inset-bottom)); }
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #cfe0ff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+.scroll-thin:hover {
+  scrollbar-color: #c3cad6 transparent;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+.skeleton {
+  background: linear-gradient(90deg, #e9edf3 0, #f5f7fa 40%, #e9edf3 80%);
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  background-color: #e9edf3;
+  animation: shimmer 1.2s infinite linear;
+  border-radius: 4px;
+}
+
+@keyframes slidein {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.slidein {
+  animation: slidein 0.15s ease-out;
+}
+@keyframes fadeup {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.fadeup {
+  animation: fadeup 0.15s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slidein,
+  .fadeup,
+  .skeleton {
+    animation: none;
+  }
+}
